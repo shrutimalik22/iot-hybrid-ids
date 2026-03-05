@@ -1,0 +1,18 @@
+# virtual environment
+venv/
+
+# python cache
+__pycache__/
+*.pyc
+
+# system files
+.DS_Store
+
+# models (optional if large)
+models/*.joblib
+
+# datasets (if very large)
+data/*.csv
+
+# logs
+*.log
