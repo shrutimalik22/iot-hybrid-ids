@@ -18,7 +18,10 @@ app = FastAPI(title="Hybrid IoT Security Lab")
 # CORS for React dev server at http://localhost:5173
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+    ],
     allow_credentials=True,
     allow_headers=["*"],
     allow_methods=["*"],
