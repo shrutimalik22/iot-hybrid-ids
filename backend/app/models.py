@@ -612,28 +612,31 @@ class LabState:
             "anom_score": anom_s,
         }
       def _push_event(
-         self,
-         device_id: str,
-         severity: str,
-         event_type: str,
-         message: str,
-         scores: dict = None,
-         label_hint: str = None,
-        ):
-        self._event_id_counter += 1
+      self,
+      device_id: str,
+      severity: str,
+      event_type: str,
+      message: str,
+      scores: dict = None,
+      label_hint: str = None,
+       ):
+       self._event_id_counter += 1
+       dev = self.devices.get(device_id)
 
-        event = SecurityEvent(
-        event_id=self._event_id_counter,
-        timestamp=datetime.utcnow(),
+       event = SecurityEvent(
+        id=self._event_id_counter,
         device_id=device_id,
+        device_name=dev.name if dev else "Unknown",
+        ip_address=dev.ip_address if dev else None,
         severity=severity,
         event_type=event_type,
         message=message,
+        timestamp=time.time(),
         scores=scores or {},
         label_hint=label_hint,
     )
 
-        self.security_events.append(event)
+       self.security_events.append(event)
       async def feature_and_detection_loop(self):
        while True:
         await asyncio.sleep(FEATURE_STEP_SEC)
